@@ -133,6 +133,18 @@ public final class FirebaseAuthenticationService: AuthenticationServiceProtocol,
         logger.debug("[FirebaseAuth] signed out")
     }
 
+    public func updateDisplayName(_ displayName: String) async throws {
+        guard let user = Auth.auth().currentUser else { return }
+        let request = user.createProfileChangeRequest()
+        request.displayName = displayName
+        try await request.commitChanges()
+        // Firebase's state listener does not promise to emit solely for a profile
+        // mutation, so publish the refreshed identity immediately.
+        let refreshed = AuthenticatedUser(from: Auth.auth().currentUser ?? user)
+        userSubject.send(refreshed)
+        stateSubject.send(.signedIn(refreshed))
+    }
+
     // MARK: - Delete Account
 
     public func deleteAccount() async throws {

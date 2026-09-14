@@ -14,6 +14,9 @@ public protocol AuthenticationServiceProtocol: AnyObject, Sendable {
     func signInWithGoogle() async throws
     func signInWithApple(idToken: String, rawNonce: String, fullName: PersonNameComponents?) async throws
     func signOut() throws
+    /// Updates the identity FirebaseAuth exposes to the host. App-private profile
+    /// repositories remain responsible for their own durable profile documents.
+    func updateDisplayName(_ displayName: String) async throws
     func deleteAccount() async throws
 }
 
