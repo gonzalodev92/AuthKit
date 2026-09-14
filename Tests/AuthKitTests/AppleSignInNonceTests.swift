@@ -15,7 +15,7 @@ final class AppleSignInNonceTests: XCTestCase {
         // SHA256("") — a fixed, well-known test vector.
         XCTAssertEqual(
             AppleSignInNonce.sha256(""),
-            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b85"
+            "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         )
         XCTAssertEqual(AppleSignInNonce.sha256("abc"), AppleSignInNonce.sha256("abc"))
     }
