@@ -1,3 +1,4 @@
+import AuthKit
 import Combine
 import FirebaseAuth
 import FirebaseCore
@@ -6,7 +7,7 @@ import GoogleSignIn
 import OSLog
 import UIKit
 
-private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "AuthKit", category: "FirebaseAuth")
+private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "AuthKitFirebase", category: "FirebaseAuth")
 
 extension AuthenticatedUser {
     init(from user: FirebaseAuth.User) {
