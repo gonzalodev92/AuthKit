@@ -70,6 +70,15 @@ public final class FirebaseAuthenticationService: AuthenticationServiceProtocol,
 
     // MARK: - Sign In with Google
 
+    /// Forwards a host app's `onOpenURL`/`application(_:open:options:)` callback to
+    /// `GIDSignIn`, completing the Google Sign-In redirect. Returns `true` if `GIDSignIn`
+    /// handled the URL. A host must call this from its own URL-callback entry point — this
+    /// package has no `UIApplicationDelegate`/scene of its own to intercept it directly.
+    @discardableResult
+    public static func handleGoogleSignInURL(_ url: URL) -> Bool {
+        GIDSignIn.sharedInstance.handle(url)
+    }
+
     public func signInWithGoogle() async throws {
         guard let clientID = FirebaseApp.app()?.options.clientID else {
             throw AuthenticationError.missingClientID
